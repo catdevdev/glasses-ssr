@@ -8,5 +8,3 @@ export interface Collections {
   collections: Collection[];
   meta: { total_count: number };
 }
-
-export interface CollectionsArgs {}

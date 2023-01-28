@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Collection } from "../types/collection";
-import { Glasses } from "../types/glasses";
+import { Collection } from "../models/collection";
+import { Glasses } from "../models/glasses";
 
 export const glassesApi = createApi({
   reducerPath: "glassesApi",
