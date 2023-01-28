@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Collections } from "../models/collection";
-import { Glasses } from "../models/glasses";
+import { Collections, CollectionsArgs } from "../types/collection";
+import { Glasses } from "../types/glasses";
 
 export const collectionsApi = createApi({
   reducerPath: "collectionsApi",
@@ -9,7 +9,7 @@ export const collectionsApi = createApi({
   }),
   tagTypes: ["Glasses"],
   endpoints: (build) => ({
-    fetchAll: build.query<Collections, {}>({
+    fetchAll: build.query<Collections, CollectionsArgs>({
       query: () => ({
         url: `/collections`,
       }),

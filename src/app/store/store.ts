@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./reducers/UserSlice";
-import { postAPI } from "../services/PostService";
+import { collectionsApi, glassesApi } from "@/entities/Product";
 
 const rootReducer = combineReducers({
   userReducer,
