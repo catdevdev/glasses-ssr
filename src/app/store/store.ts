@@ -1,17 +1,19 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/UserSlice";
 import { collectionsApi, glassesApi } from "@/entities/Product";
 
 const rootReducer = combineReducers({
-  userReducer,
-  [postAPI.reducerPath]: postAPI.reducer,
+  [collectionsApi.reducerPath]: collectionsApi.reducer,
+  [glassesApi.reducerPath]: glassesApi.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(postAPI.middleware),
+      getDefaultMiddleware().concat(
+        collectionsApi.middleware,
+        glassesApi.middleware
+      ),
   });
 };
 
