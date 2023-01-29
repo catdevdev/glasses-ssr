@@ -4,7 +4,12 @@ export interface Collection {
   configuration_name: string;
 }
 
-export interface Collections {
+export interface CollectionsResponse {
   collections: Collection[];
   meta: { total_count: number };
+}
+
+export interface CollectionsInitialState {
+  collections: Collection[];
+  error: string | undefined;
 }

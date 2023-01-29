@@ -1,10 +1,15 @@
 import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit";
-import { collectionsApi, glassesApi } from "@/entities/Product";
+import {
+  collectionsSlice,
+  glassesSlice,
+  filtersSlice,
+} from "@/entities/Product";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 
 const rootReducer = combineReducers({
-  [collectionsApi.reducerPath]: collectionsApi.reducer,
-  [glassesApi.reducerPath]: glassesApi.reducer,
+  collectionsSlice,
+  glassesSlice,
+  filtersSlice,
 });
 
 export const reducer = (
