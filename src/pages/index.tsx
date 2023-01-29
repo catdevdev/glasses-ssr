@@ -10,7 +10,7 @@ import { NextThunkDispatch, setupStore, wrapper } from "@/app/store/store";
 import { Provider } from "react-redux";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks/redux";
 import { useEffect } from "react";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPageContext } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
