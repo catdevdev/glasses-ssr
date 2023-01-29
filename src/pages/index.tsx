@@ -1,33 +1,29 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { collectionsSlice } from "@/entities/Product";
-import { setupStore, wrapper } from "@/app/store/store";
+import {
+  collectionsSlice,
+  fetchCollections,
+  fetchGlasses,
+  filtersSlice,
+} from "@/entities/Product";
+import { NextThunkDispatch, setupStore, wrapper } from "@/app/store/store";
 import { Provider } from "react-redux";
-import { useAppSelector } from "@/shared/hooks/redux";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks/redux";
+import { useEffect } from "react";
+import { GetServerSideProps } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 let store = setupStore();
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    ({}) => {
-      console.log(
-        "2. Page.getServerSideProps uses the store to dispatch things"
-      );
-      store.dispatch({ type: "TICK", payload: "was set in other page" });
-
-      return {
-        props: {
-          test: 123,
-        }, // will be passed to the page component as props
-      };
-    }
-);
-
 const Home = ({ test }) => {
-  const a = useAppSelector((state) => state.collectionsState);
+  const data = useAppSelector((state) => state.collectionsState);
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // dispatch(fetchCollections());
+  }, [dispatch]);
   return (
     <>
       <Head>
@@ -38,11 +34,15 @@ const Home = ({ test }) => {
       </Head>
       <main>
         123
-        {test}
-        {/* <div>{JSON.stringify(data && data?.collections)}</div> */}
+        <div>{JSON.stringify(data && data?.collections)}</div>
       </main>
     </>
   );
 };
 
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    await store.dispatch(fetchCollections() as any);
+  }
+);
 export default Home;

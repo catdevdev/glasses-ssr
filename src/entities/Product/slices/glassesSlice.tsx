@@ -9,7 +9,7 @@ import {
   GlassesResponse,
 } from "../models/glasses";
 
-const fetchGlasses = createAsyncThunk(
+export const fetchGlasses = createAsyncThunk(
   "glasses/fetchGlasses",
   async (type: string, thunkAPI): Promise<GlassesResponse> => {
     const params: GlassesParams = {

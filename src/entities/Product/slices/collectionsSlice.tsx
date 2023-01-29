@@ -3,18 +3,18 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CollectionsInitialState } from "../models/collections";
 import { CollectionsResponse } from "../models/collections";
 
-const fetchCollections = createAsyncThunk(
-  "glasses/fetchGlasses",
-  async (type: string, thunkAPI): Promise<CollectionsResponse> => {
+export const fetchCollections = createAsyncThunk(
+  "collections",
+  async (_, thunkAPI): Promise<CollectionsResponse> => {
     const response = await axiosInstance.get<CollectionsResponse>(
-      `/collections/${type}/glasses`
+      `/collections`
     );
 
     return response.data;
   }
 );
 
-const collecitonsSlice = createSlice({
+const collectionsSlice = createSlice({
   name: "collections",
   initialState: {
     collections: [],
@@ -31,4 +31,4 @@ const collecitonsSlice = createSlice({
   },
 });
 
-export { collecitonsSlice };
+export { collectionsSlice };
