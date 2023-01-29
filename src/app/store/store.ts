@@ -17,9 +17,23 @@ const rootReducer = combineReducers({
   filtersState: filtersSlice.reducer,
 });
 
+const reducer = (state, action) => {
+  console.log(action);
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state, // use previous state
+      ...action.payload, // apply delta from hydration
+    };
+    if (state.count) nextState.count = state.count; // preserve count value on client side navigation
+    return nextState;
+  } else {
+    return rootReducer(state, action);
+  }
+};
+
 export const setupStore = () => {
   return configureStore({
-    reducer: rootReducer,
+    reducer,
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
   });
 };
