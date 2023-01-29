@@ -18,7 +18,7 @@ const collecitonsSlice = createSlice({
   name: "collections",
   initialState: {
     collections: [],
-    error: undefined,
+    error: null,
   } as CollectionsInitialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -31,4 +31,4 @@ const collecitonsSlice = createSlice({
   },
 });
 
-export default collecitonsSlice.reducer;
+export { collecitonsSlice };

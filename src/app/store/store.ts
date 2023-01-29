@@ -7,9 +7,9 @@ import {
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 
 const rootReducer = combineReducers({
-  collectionsSlice,
-  glassesSlice,
-  filtersSlice,
+  collectionsState: collectionsSlice,
+  glassesState: glassesSlice,
+  filtersState: filtersSlice,
 });
 
 export const reducer = (
@@ -30,11 +30,7 @@ export const reducer = (
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(
-        collectionsApi.middleware,
-        glassesApi.middleware
-      ),
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
   });
 };
 

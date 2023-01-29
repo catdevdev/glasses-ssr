@@ -47,7 +47,7 @@ const glassesSlice = createSlice({
     page: 1,
     glasses: [],
     isLoading: false,
-    error: undefined,
+    error: null,
   } as GlassesInitialState,
   reducers: {
     addGlasses: (state, action: PayloadAction<Glasses[]>) => {
@@ -71,4 +71,4 @@ const glassesSlice = createSlice({
   },
 });
 
-export default glassesSlice.reducer;
+export { glassesSlice };

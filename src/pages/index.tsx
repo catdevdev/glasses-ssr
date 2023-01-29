@@ -1,15 +1,32 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { collectionsApi } from "@/entities/Product";
+import { collectionsSlice } from "@/entities/Product";
 import { setupStore, wrapper } from "@/app/store/store";
 import { Provider } from "react-redux";
+import { useAppSelector } from "@/shared/hooks/redux";
 
 const inter = Inter({ subsets: ["latin"] });
 
 let store = setupStore();
 
-const Home = () => {
-  const { data, isLoading, isError } = collectionsApi.useFetchAllQuery();
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    ({}) => {
+      console.log(
+        "2. Page.getServerSideProps uses the store to dispatch things"
+      );
+      store.dispatch({ type: "TICK", payload: "was set in other page" });
+
+      return {
+        props: {
+          test: 123,
+        }, // will be passed to the page component as props
+      };
+    }
+);
+
+const Home = ({ test }) => {
+  const a = useAppSelector((state) => state.collectionsState);
 
   return (
     <>
@@ -20,12 +37,12 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>{JSON.stringify(data && data?.collections)}</div>
+        123
+        {test}
+        {/* <div>{JSON.stringify(data && data?.collections)}</div> */}
       </main>
     </>
   );
 };
-
-//
 
 export default Home;

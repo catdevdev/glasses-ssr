@@ -5,8 +5,14 @@ import { setupStore, wrapper } from "../app/store/store";
 
 // const store = setupStore();
 
-const App = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />;
+const App = ({ Component, ...rest }: AppProps) => {
+  const { store, props } = wrapper.useWrappedStore(rest);
+
+  return (
+    <Provider store={store}>
+      <Component {...props.pageProps} />
+    </Provider>
+  );
 };
 
-export default wrapper.withRedux(App);
+export default App;

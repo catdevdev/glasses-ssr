@@ -11,5 +11,5 @@ export interface CollectionsResponse {
 
 export interface CollectionsInitialState {
   collections: Collection[];
-  error: string | undefined;
+  error: string | null | undefined;
 }

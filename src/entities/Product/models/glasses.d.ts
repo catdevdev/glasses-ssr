@@ -63,7 +63,7 @@ export interface GlassesInitialState {
   page: number;
   glasses: Glasses[];
   isLoading: boolean;
-  error: string | undefined;
+  error: string | null | undefined;
 }
 
 export interface GlassesResponse {

@@ -1,5 +1,3 @@
-import collectionsSlice from "./slices/collectionsSlice";
-import glassesSlice from "./slices/glassesSlice";
-import filtersSlice from "./slices/filtersSlice";
-
-export { collectionsSlice, glassesSlice, filtersSlice };
+export { collecitonsSlice } from "./slices/collectionsSlice";
+export { glassesSlice } from "./slices/glassesSlice";
+export { filtersSlice } from "./slices/filtersSlice";
