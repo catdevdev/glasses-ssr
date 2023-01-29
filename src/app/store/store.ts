@@ -1,15 +1,21 @@
 import {
   AnyAction,
-  combineReducers,
+  CombinedState,
   configureStore,
+  Reducer,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
+
+import { combineReducers } from "redux";
 import {
   collectionsSlice,
   glassesSlice,
   filtersSlice,
 } from "@/entities/Product";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
+import { GlassesInitialState } from "@/entities/Product/models/glasses";
+import { FiltersInitialState } from "@/entities/Product/models/filters";
+import { CollectionsInitialState } from "@/entities/Product/models/collections";
 
 const rootReducer = combineReducers({
   collectionsState: collectionsSlice.reducer,
@@ -17,7 +23,7 @@ const rootReducer = combineReducers({
   filtersState: filtersSlice.reducer,
 });
 
-const reducer = (state, action) => {
+const reducerForHydrate = (state, action) => {
   console.log(action);
   if (action.type === HYDRATE) {
     const nextState = {
@@ -31,12 +37,23 @@ const reducer = (state, action) => {
   }
 };
 
+const reducerForHydrateWithTypes = reducerForHydrate as Reducer<
+  CombinedState<{
+    collectionsState: CollectionsInitialState;
+    glassesState: GlassesInitialState;
+    filtersState: FiltersInitialState;
+  }>,
+  AnyAction
+>;
+
 export const setupStore = () => {
   return configureStore({
-    reducer,
+    reducer: reducerForHydrateWithTypes,
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
   });
 };
+
+setupStore().getState().collectionsState.collections;
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;

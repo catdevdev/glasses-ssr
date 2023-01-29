@@ -11,19 +11,11 @@ import { Provider } from "react-redux";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks/redux";
 import { useEffect } from "react";
 import { GetServerSideProps, NextPageContext } from "next";
+import { GlassesGalery } from "@/widgets/GlassesList";
 
 const inter = Inter({ subsets: ["latin"] });
 
-let store = setupStore();
-
-const Home = ({ test }) => {
-  const data = useAppSelector((state) => state.collectionsState);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // dispatch(fetchCollections());
-  }, [dispatch]);
+const Home = () => {
   return (
     <>
       <Head>
@@ -33,16 +25,13 @@ const Home = ({ test }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        123
-        <div>{JSON.stringify(data && data?.collections)}</div>
+        <div>
+          123
+          <GlassesGalery />
+        </div>
       </main>
     </>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    await store.dispatch(fetchCollections() as any);
-  }
-);
 export default Home;

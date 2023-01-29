@@ -1,7 +1,16 @@
+import { AppStore } from "@/app/store/store";
 import { axiosInstance } from "@/shared/api/axiosInstance";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  createAsyncThunk,
+  createSlice,
+  Dispatch,
+  PayloadAction,
+} from "@reduxjs/toolkit";
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { Collection } from "../models/collections";
+import { FilterArgument } from "../models/filters";
 import {
   Glasses,
   GlassesInitialState,
@@ -11,7 +20,12 @@ import {
 
 export const fetchGlasses = createAsyncThunk(
   "glasses/fetchGlasses",
-  async (type: string, thunkAPI): Promise<GlassesResponse> => {
+  async (
+    { colours, shapes }: FilterArgument,
+    thunkAPI
+  ): Promise<GlassesResponse> => {
+    const getState = thunkAPI.getState as AppStore["getState"];
+
     const params: GlassesParams = {
       sort: {
         type: "",
@@ -21,19 +35,19 @@ export const fetchGlasses = createAsyncThunk(
         lens_variant_prescriptions: [],
         lens_variant_types: [],
         frame_variant_home_trial_available: false,
-        glass_variant_frame_variant_colour_tag_configuration_names: [],
-        glass_variant_frame_variant_frame_tag_configuration_names: [],
+        glass_variant_frame_variant_colour_tag_configuration_names: colours,
+        glass_variant_frame_variant_frame_tag_configuration_names: shapes,
         // ●  Colour: “black”, “tortoise”, “coloured”, “crystal”, “dark” and “bright”.
         // ● Shape: “square”, “rectangle”, “round” and “cat-eye”
       },
       page: {
-        limit: 0,
-        number: 0,
+        limit: 5,
+        number: getState().glassesState.page,
       },
     };
 
     const response = await axiosInstance.get<GlassesResponse>(
-      `/collections/${type}/glasses`,
+      `/collections/${"spectacles-men"}/glasses`,
       { params }
     );
 
@@ -49,12 +63,7 @@ const glassesSlice = createSlice({
     isLoading: false,
     error: null,
   } as GlassesInitialState,
-  reducers: {
-    addGlasses: (state, action: PayloadAction<Glasses[]>) => {
-      state.glasses = state.glasses.concat(action.payload);
-      state.page += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchGlasses.pending, (state, action) => {
       state.isLoading = true;
