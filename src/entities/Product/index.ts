@@ -1,2 +1,2 @@
-export { collectionsApi } from "./api/collectionsService";
-export { glassesApi } from "./api/glassesService";
+export { collectionsApi } from "./slices/collectionSlice";
+export { glassesApi } from "./slices/glassesSlice";

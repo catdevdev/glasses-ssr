@@ -1,10 +1,14 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import { collectionsApi } from "@/entities/Product";
+import { setupStore, wrapper } from "@/app/store/store";
+import { Provider } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+let store = setupStore();
+
+const Home = () => {
   const { data, isLoading, isError } = collectionsApi.useFetchAllQuery();
 
   return (
@@ -16,8 +20,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <pre>{data?.collections}</pre>
+        <div>{JSON.stringify(data && data?.collections)}</div>
       </main>
     </>
   );
-}
+};
+
+//
+
+export default Home;
