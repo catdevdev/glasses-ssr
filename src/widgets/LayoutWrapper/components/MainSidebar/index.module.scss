@@ -2,9 +2,26 @@
   &__container {
     width: 300px;
     height: 100vh;
-    background: green;
-    // z-index: 1000;
-    // position: fixed;
+    background: purple;
+    position: fixed;
+    z-index: 2000;
+    transition: transform 200ms ease-in-out;
+  }
+
+  &__container--enter-active {
+    transform: translateX(0%);
+  }
+
+  &__container--enter-done {
+    transform: translateX(0%);
+  }
+
+  &__container--exit-active {
+    transform: translateX(-100%);
+  }
+
+  &__container--exit-done {
+    transform: translateX(-100%);
   }
 }
 

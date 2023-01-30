@@ -1,26 +1,39 @@
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import styles from "./index.module.scss";
+import { CSSTransition } from "react-transition-group";
 
-const MainSideBar = () => {
+const MainSideBar = ({ active }: { active: boolean }) => {
+  console.log(active);
   return (
-    <div className={styles.sidebar__container}>
-      <div className={styles.navlink}>
-        <div className={styles.navlink__wrapper}>
-          <div className={styles.navlink__title}>hello</div>
-          <IoMdArrowDropupCircle />
-        </div>
-        <div className={styles.navlink__wrapper}>
-          <div className={styles.navlink__title}>hello</div>
-          <IoMdArrowDropupCircle />
-        </div>
-        <div className={styles.navlink__wrapper}>
-          <div className={styles.navlink__title}>hello</div>
-        </div>
-        <div className={styles.navlink__wrapper}>
-          <div className={styles.navlink__title}>hello</div>
+    <CSSTransition
+      in={active}
+      timeout={200}
+      classNames={{
+        enterActive: styles["sidebar__container--enter-active"],
+        enterDone: styles["sidebar__container--enter-done"],
+        exitActive: styles["sidebar__container--exit-active"],
+        exitDone: styles["sidebar__container--exit-done"],
+      }}
+    >
+      <div className={styles.sidebar__container}>
+        <div className={styles.navlink}>
+          <div className={styles.navlink__wrapper}>
+            <div className={styles.navlink__title}>hello</div>
+            <IoMdArrowDropupCircle />
+          </div>
+          <div className={styles.navlink__wrapper}>
+            <div className={styles.navlink__title}>hello</div>
+            <IoMdArrowDropupCircle />
+          </div>
+          <div className={styles.navlink__wrapper}>
+            <div className={styles.navlink__title}>hello</div>
+          </div>
+          <div className={styles.navlink__wrapper}>
+            <div className={styles.navlink__title}>hello</div>
+          </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 };
 

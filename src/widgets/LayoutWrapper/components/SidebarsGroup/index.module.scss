@@ -2,5 +2,22 @@
   &__container {
     position: fixed;
     z-index: 1000;
+    transition: transform 400ms ease-in-out;
+  }
+
+  &__container--enter-active {
+    transform: translateX(-100%);
+  }
+
+  &__container--enter-done {
+    transform: translateX(-100%);
+  }
+
+  &__container--exit-active {
+    transform: translateX(0);
+  }
+
+  &__container--exit-done {
+    transform: translateX(0);
   }
 }

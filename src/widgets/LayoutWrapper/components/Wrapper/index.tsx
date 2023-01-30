@@ -1,13 +1,13 @@
 import styles from "./index.module.scss";
 import Header from "../Header";
-import SideBar from "../SidebarsGroup";
-import { ReactNode, use, useState } from "react";
+
+import { ReactNode, useState } from "react";
 import NavigationBar from "../NavigationBar";
 import FilterBar from "../FiltersBar";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import { filtersSlice } from "@/entities/Product";
 import { FilterOptionsInput } from "@/entities/Product/models/filters";
-import { refetchGlasses } from "@/entities/Product/slices/glassesSlice";
+
 import SidebarsGroup from "../SidebarsGroup";
 
 interface WrapperProps {
@@ -60,10 +60,27 @@ const Wrapper = ({ children }: WrapperProps) => {
 
   ///
 
+  const [activeMain, setActiveMain] = useState(false);
+  const [activeSub, setActiveSub] = useState(false);
+
   return (
     <div>
       <Header />
-      <SidebarsGroup />
+      <div
+        onClick={() => {
+          setActiveMain(!activeMain);
+        }}
+      >
+        123123
+      </div>
+      <div
+        onClick={() => {
+          setActiveSub(!activeSub);
+        }}
+      >
+        99999
+      </div>
+      <SidebarsGroup activeMain={activeMain} activeSub={activeSub} />
       {/* <SideBar /> */}
       <NavigationBar
         openCloseColors={() => openCloseFilter("colours")}
