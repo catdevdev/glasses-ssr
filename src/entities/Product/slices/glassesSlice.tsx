@@ -18,6 +18,8 @@ import {
   GlassesResponse,
 } from "../models/glasses";
 
+import qs from "qs";
+
 export const fetchGlasses = createAsyncThunk(
   "glasses/fetchGlasses",
   async (
@@ -37,8 +39,6 @@ export const fetchGlasses = createAsyncThunk(
         frame_variant_home_trial_available: false,
         glass_variant_frame_variant_colour_tag_configuration_names: colours,
         glass_variant_frame_variant_frame_tag_configuration_names: shapes,
-        // ●  Colour: “black”, “tortoise”, “coloured”, “crystal”, “dark” and “bright”.
-        // ● Shape: “square”, “rectangle”, “round” and “cat-eye”
       },
       page: {
         limit: 15,
@@ -48,7 +48,61 @@ export const fetchGlasses = createAsyncThunk(
 
     const response = await axiosInstance.get<GlassesResponse>(
       `/collections/${"spectacles-men"}/glasses`,
-      { params }
+      {
+        params,
+        paramsSerializer: {
+          serialize: (params) => {
+            return qs.stringify(params, { arrayFormat: "repeat" });
+          },
+        },
+      }
+    );
+
+    return response.data;
+  }
+);
+
+export const refetchGlasses = createAsyncThunk(
+  "glasses/refetchGlasses",
+  async (
+    { colours, shapes }: FilterArgument,
+    thunkAPI
+  ): Promise<GlassesResponse> => {
+    const getState = thunkAPI.getState as AppStore["getState"];
+
+    const params: GlassesParams = {
+      sort: {
+        type: "",
+        order: "",
+      },
+      filters: {
+        lens_variant_prescriptions: [],
+        lens_variant_types: [],
+        frame_variant_home_trial_available: false,
+        glass_variant_frame_variant_colour_tag_configuration_names: colours,
+        glass_variant_frame_variant_frame_tag_configuration_names: shapes,
+      },
+      page: {
+        limit: 15,
+        number: getState().glassesState.page,
+      },
+    };
+
+    // how to put colours or shapes in this view:
+
+    // filters[glass_variant_frame_variant_colour_tag_configuration_names][]=black&filters[glas
+    //   s_variant_frame_variant_colour_tag_configuration_names][]=bright
+
+    const response = await axiosInstance.get<GlassesResponse>(
+      `/collections/${"spectacles-men"}/glasses`,
+      {
+        params,
+        paramsSerializer: {
+          serialize: (params) => {
+            return qs.stringify(params, { arrayFormat: "repeat" });
+          },
+        },
+      }
     );
 
     return response.data;
@@ -75,12 +129,31 @@ const glassesSlice = createSlice({
         state.isLoading = false;
         return;
       }
-
       state.glasses = state.glasses.concat(action.payload.glasses);
       state.page += 1;
       state.isLoading = false;
     });
     builder.addCase(fetchGlasses.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
+
+    //
+
+    builder.addCase(refetchGlasses.pending, (state, _) => {
+      state.isLoading = true;
+    });
+    builder.addCase(refetchGlasses.fulfilled, (state, action) => {
+      if (action.payload.glasses.length === 0) {
+        state.hasMore = false;
+        state.isLoading = false;
+        return;
+      }
+      state.glasses = action.payload.glasses;
+      state.page = 1;
+      state.isLoading = false;
+    });
+    builder.addCase(refetchGlasses.rejected, (state, action) => {
       state.error = action.error.message;
       state.isLoading = false;
     });

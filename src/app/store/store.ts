@@ -16,6 +16,7 @@ import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { GlassesInitialState } from "@/entities/Product/models/glasses";
 import { FiltersInitialState } from "@/entities/Product/models/filters";
 import { CollectionsInitialState } from "@/entities/Product/models/collections";
+import { filterListener } from "@/entities/Product/middleware/filterListener";
 
 const rootReducer = combineReducers({
   collectionsState: collectionsSlice.reducer,
@@ -48,7 +49,8 @@ const reducerForHydrateWithTypes = reducerForHydrate as Reducer<
 export const setupStore = () => {
   return configureStore({
     reducer: reducerForHydrateWithTypes,
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend(filterListener.middleware).concat(),
   });
 };
 

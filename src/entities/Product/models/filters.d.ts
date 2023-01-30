@@ -14,3 +14,5 @@ export interface FiltersInitialState {
     shapes: FilterCategory;
   };
 }
+
+export type FilterOptionsInput = keyof FilterArgument;

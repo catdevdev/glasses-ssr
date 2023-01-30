@@ -14,10 +14,15 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
     (state) => state.glassesState
   );
 
+  const { colours, shapes } = useAppSelector(
+    (state) => state.filtersState.filterOptions
+  );
+
   const fetchMoreData = () => {
     if (!isLoading && hasMore) {
-      console.log("123");
-      dispatch(fetchGlasses({ colours: [], shapes: [] }));
+      dispatch(
+        fetchGlasses({ colours: colours.selected, shapes: shapes.selected })
+      );
     }
   };
 
