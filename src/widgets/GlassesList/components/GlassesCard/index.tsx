@@ -1,22 +1,22 @@
 import styles from "./index.module.scss";
+import Image from "next/image";
 
 interface GlassesCardProps {
   name: string;
   imageUrl: string;
+  cardIsLoading: boolean;
 }
 
-const GlassesCard = ({ name, imageUrl }: GlassesCardProps) => {
+const GlassesCard = ({ name, imageUrl, cardIsLoading }: GlassesCardProps) => {
   return (
     <div
       style={{
-        backgroundImage: `url(${imageUrl})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+        padding: cardIsLoading ? 5 : 0,
       }}
       className={styles.card__container}
     >
-      {name}
+      <div className={styles.card__title}>{name}</div>
+      <img src={imageUrl} className={styles.card__image} />
     </div>
   );
 };

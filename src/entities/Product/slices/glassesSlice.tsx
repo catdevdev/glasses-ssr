@@ -84,14 +84,9 @@ export const refetchGlasses = createAsyncThunk(
       },
       page: {
         limit: 15,
-        number: getState().glassesState.page,
+        number: 1,
       },
     };
-
-    // how to put colours or shapes in this view:
-
-    // filters[glass_variant_frame_variant_colour_tag_configuration_names][]=black&filters[glas
-    //   s_variant_frame_variant_colour_tag_configuration_names][]=bright
 
     const response = await axiosInstance.get<GlassesResponse>(
       `/collections/${"spectacles-men"}/glasses`,
@@ -115,6 +110,7 @@ const glassesSlice = createSlice({
     page: 1,
     glasses: [],
     isLoading: false,
+    isUpdatesLoading: false,
     hasMore: true,
     error: null,
   } as GlassesInitialState,
@@ -142,20 +138,20 @@ const glassesSlice = createSlice({
 
     builder.addCase(refetchGlasses.pending, (state, _) => {
       state.isLoading = true;
+      state.isUpdatesLoading = true;
     });
     builder.addCase(refetchGlasses.fulfilled, (state, action) => {
-      if (action.payload.glasses.length === 0) {
-        state.hasMore = false;
-        state.isLoading = false;
-        return;
-      }
       state.glasses = action.payload.glasses;
-      state.page = 1;
+      state.page = 2;
+
       state.isLoading = false;
+      state.isUpdatesLoading = false;
+      state.hasMore = true;
     });
     builder.addCase(refetchGlasses.rejected, (state, action) => {
       state.error = action.error.message;
       state.isLoading = false;
+      state.isUpdatesLoading = false;
     });
   },
 });

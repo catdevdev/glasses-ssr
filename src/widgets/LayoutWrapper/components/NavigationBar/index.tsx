@@ -12,9 +12,13 @@ const NavigationBar = ({
       <div className={styles.navbar}>
         <div className={styles.navbar__cell}></div>
         <div className={styles.navbar__logo}>Spectacles Woman</div>
-        <div className={styles.navbar__filters}>
-          <button onClick={openCloseColors}>Colour</button>
-          <button onClick={openCloseShapes}>Shapes</button>
+        <div className={styles.filters}>
+          <div className={styles.filters__wrapper} onClick={openCloseColors}>
+            <div className={styles.filters__button}>Colors</div>
+          </div>
+          <div className={styles.filters__wrapper} onClick={openCloseShapes}>
+            <div className={styles.filters__button}>Shapes</div>
+          </div>
         </div>
       </div>
     </div>

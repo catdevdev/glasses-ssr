@@ -1,5 +1,27 @@
 .card {
   &__container {
     height: 200px;
+    transition: padding 2s ease;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__image {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+  }
+
+  &__title {
+    font-size: 24px;
+
+    position: absolute;
+    top: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
   }
 }

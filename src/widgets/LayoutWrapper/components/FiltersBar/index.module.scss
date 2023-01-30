@@ -14,9 +14,12 @@
 
   &__filterbar {
     @at-root #{$block}__title {
+      padding-top: 12px;
       text-align: center;
       font-size: 36px;
       height: 40px;
+      text-transform: capitalize;
+      border-top: 1px solid black;
     }
     @at-root #{$block}__options {
       width: 450px;

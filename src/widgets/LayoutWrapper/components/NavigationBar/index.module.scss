@@ -18,31 +18,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 28px;
+    font-weight: 600;
   }
+}
 
-  &__filters {
-    @extend .navbar__cell;
-    display: grid;
-    grid: 1px;
-    grid-template-columns: repeat(4, 1fr);
+.filters {
+  @extend .navbar__cell;
+  display: grid;
+  grid: 1px;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
-    & > button {
-      margin: 1px 0 0 0;
-      text-align: center;
-      height: 100%;
-      border-right: 1px solid black;
-      background-color: initial;
+    border-right: 1px solid black;
+  }
 
-      cursor: pointer;
-
-      border: none;
-      padding: 0;
-      margin: 0;
-      color: initial;
-      font-size: inherit;
-      font-family: inherit;
-    }
+  &__button {
+    font-size: 16px;
   }
 }

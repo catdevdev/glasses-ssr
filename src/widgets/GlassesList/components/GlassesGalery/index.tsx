@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 interface GlassesGaleryProps {}
 
 const GlassesGalery = ({}: GlassesGaleryProps) => {
-  const { glasses, isLoading, hasMore } = useAppSelector(
+  const { glasses, isLoading, isUpdatesLoading, hasMore } = useAppSelector(
     (state) => state.glassesState
   );
 
@@ -53,7 +53,12 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
             const firstImageUrl = glass_variants[0].media[0].url;
 
             return (
-              <GlassesCard key={id} name={name} imageUrl={firstImageUrl} />
+              <GlassesCard
+                key={id}
+                name={name}
+                imageUrl={firstImageUrl}
+                cardIsLoading={isUpdatesLoading}
+              />
             );
           })}
         </div>
