@@ -22,12 +22,21 @@ const startFilterListener = filterListener.startListening as AppStartListening;
 //   AppDispatch
 // >;
 
+// @ts-ignore
+let previousDispatchCall = null;
+
 startFilterListener({
   actionCreator: filtersSlice.actions.switchFilterOption,
   effect: (action, state) => {
-    // const { filterType, option } = action.payload;
     const { colours, shapes } = state.getState().filtersState.filterOptions;
-    state.dispatch(
+    const { isLoading } = state.getState().glassesState;
+
+    // @ts-ignore
+    if (previousDispatchCall) {
+      previousDispatchCall.abort();
+    }
+
+    previousDispatchCall = state.dispatch(
       refetchGlasses({
         colours: colours.selected,
         shapes: shapes.selected,

@@ -60,6 +60,7 @@ const Wrapper = ({ children }: WrapperProps) => {
   return (
     <div>
       <Header />
+      <SideBar />
       <NavigationBar
         openCloseColors={() => openCloseFilter("colours")}
         openCloseShapes={() => openCloseFilter("shapes")}
@@ -74,7 +75,6 @@ const Wrapper = ({ children }: WrapperProps) => {
         />
       ))}
 
-      <SideBar />
       {children}
     </div>
   );

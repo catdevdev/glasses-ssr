@@ -18,7 +18,10 @@ import {
   GlassesResponse,
 } from "../models/glasses";
 
+import axios from "axios";
+
 import qs from "qs";
+import { abort } from "process";
 
 export const fetchGlasses = createAsyncThunk(
   "glasses/fetchGlasses",
@@ -46,6 +49,11 @@ export const fetchGlasses = createAsyncThunk(
       },
     };
 
+    const source = axios.CancelToken.source();
+    thunkAPI.signal.addEventListener("abort", () => {
+      source.cancel();
+    });
+
     const response = await axiosInstance.get<GlassesResponse>(
       `/collections/${"spectacles-men"}/glasses`,
       {
@@ -55,6 +63,7 @@ export const fetchGlasses = createAsyncThunk(
             return qs.stringify(params, { arrayFormat: "repeat" });
           },
         },
+        cancelToken: source.token,
       }
     );
 
@@ -88,6 +97,11 @@ export const refetchGlasses = createAsyncThunk(
       },
     };
 
+    const source = axios.CancelToken.source();
+    thunkAPI.signal.addEventListener("abort", () => {
+      source.cancel();
+    });
+
     const response = await axiosInstance.get<GlassesResponse>(
       `/collections/${"spectacles-men"}/glasses`,
       {
@@ -97,6 +111,7 @@ export const refetchGlasses = createAsyncThunk(
             return qs.stringify(params, { arrayFormat: "repeat" });
           },
         },
+        cancelToken: source.token,
       }
     );
 
