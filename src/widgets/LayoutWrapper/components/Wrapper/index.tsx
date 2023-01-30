@@ -80,8 +80,8 @@ const Wrapper = ({ children }: WrapperProps) => {
       >
         99999
       </div>
-      <SidebarsGroup activeMain={activeMain} activeSub={activeSub} />
-      {/* <SideBar /> */}
+      <SidebarsGroup />
+
       <NavigationBar
         openCloseColors={() => openCloseFilter("colours")}
         openCloseShapes={() => openCloseFilter("shapes")}

@@ -1,12 +1,13 @@
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import styles from "./index.module.scss";
 import { CSSTransition } from "react-transition-group";
+import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
-const MainSideBar = ({ active }: { active: boolean }) => {
-  console.log(active);
+const MainSideBar = () => {
+  const { isOpenMainSidebar } = useIsOpenSidebar();
   return (
     <CSSTransition
-      in={active}
+      in={isOpenMainSidebar}
       timeout={200}
       classNames={{
         enterActive: styles["sidebar__container--enter-active"],

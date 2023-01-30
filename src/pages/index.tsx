@@ -3,6 +3,7 @@ import { GlassesGalery } from "@/widgets/GlassesList";
 import { LayoutWrapper } from "@/widgets/LayoutWrapper";
 import { wrapper } from "@/app/store/store";
 import { fetchCollections, fetchGlasses } from "@/entities/Product";
+import { IsOpenSidebarProvider } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
 const Home = () => {
   return (
@@ -14,9 +15,11 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <LayoutWrapper>
-          <GlassesGalery />
-        </LayoutWrapper>
+        <IsOpenSidebarProvider>
+          <LayoutWrapper>
+            <GlassesGalery />
+          </LayoutWrapper>
+        </IsOpenSidebarProvider>
       </main>
     </>
   );

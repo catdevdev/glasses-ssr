@@ -3,17 +3,11 @@ import { CSSTransition } from "react-transition-group";
 import styles from "./index.module.scss";
 import MainSideBar from "../MainSidebar";
 
-const SidebarsGroup = ({
-  activeMain,
-  activeSub,
-}: {
-  activeMain: boolean;
-  activeSub: boolean;
-}) => {
+const SidebarsGroup = () => {
   return (
     <div>
-      <MainSideBar active={activeMain} />
-      <SubSideBar active={activeSub} />
+      <MainSideBar />
+      <SubSideBar />
     </div>
   );
 };
