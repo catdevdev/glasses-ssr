@@ -61,14 +61,21 @@ const glassesSlice = createSlice({
     page: 1,
     glasses: [],
     isLoading: false,
+    hasMore: true,
     error: null,
   } as GlassesInitialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchGlasses.pending, (state, action) => {
+    builder.addCase(fetchGlasses.pending, (state, _) => {
       state.isLoading = true;
     });
     builder.addCase(fetchGlasses.fulfilled, (state, action) => {
+      if (action.payload.glasses.length === 0) {
+        state.hasMore = false;
+        state.isLoading = false;
+        return;
+      }
+
       state.glasses = state.glasses.concat(action.payload.glasses);
       state.page += 1;
       state.isLoading = false;

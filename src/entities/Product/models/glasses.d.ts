@@ -63,11 +63,12 @@ export interface GlassesInitialState {
   page: number;
   glasses: Glasses[];
   isLoading: boolean;
+  hasMore: boolean;
   error: string | null | undefined;
 }
 
 export interface GlassesResponse {
-  glasses: Glasses;
+  glasses: Glasses[];
   meta: {
     total_count: number;
   };
