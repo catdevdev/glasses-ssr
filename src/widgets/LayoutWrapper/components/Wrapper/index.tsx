@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import Header from "../Header";
-import SideBar from "../SideBar";
+import SideBar from "../SidebarsGroup";
 import { ReactNode, use, useState } from "react";
 import NavigationBar from "../NavigationBar";
 import FilterBar from "../FiltersBar";
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import { filtersSlice } from "@/entities/Product";
 import { FilterOptionsInput } from "@/entities/Product/models/filters";
 import { refetchGlasses } from "@/entities/Product/slices/glassesSlice";
+import SidebarsGroup from "../SidebarsGroup";
 
 interface WrapperProps {
   children: ReactNode | ReactNode[];
@@ -57,10 +58,13 @@ const Wrapper = ({ children }: WrapperProps) => {
     );
   };
 
+  ///
+
   return (
     <div>
       <Header />
-      <SideBar />
+      <SidebarsGroup />
+      {/* <SideBar /> */}
       <NavigationBar
         openCloseColors={() => openCloseFilter("colours")}
         openCloseShapes={() => openCloseFilter("shapes")}

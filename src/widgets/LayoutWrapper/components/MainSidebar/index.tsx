@@ -1,7 +1,7 @@
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import styles from "./index.module.scss";
 
-const SideBar = () => {
+const MainSideBar = () => {
   return (
     <div className={styles.sidebar__container}>
       <div className={styles.navlink}>
@@ -15,15 +15,13 @@ const SideBar = () => {
         </div>
         <div className={styles.navlink__wrapper}>
           <div className={styles.navlink__title}>hello</div>
-          <IoMdArrowDropupCircle />
         </div>
         <div className={styles.navlink__wrapper}>
           <div className={styles.navlink__title}>hello</div>
-          <IoMdArrowDropupCircle />
         </div>
       </div>
     </div>
   );
 };
 
-export default SideBar;
+export default MainSideBar;
