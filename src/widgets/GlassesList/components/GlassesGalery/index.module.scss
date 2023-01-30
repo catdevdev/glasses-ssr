@@ -1,0 +1,11 @@
+.gallery {
+  &__wrapper {
+    background: #000;
+  }
+  &__container {
+    display: grid;
+    gap: 1px;
+    padding: 1px 0 0;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

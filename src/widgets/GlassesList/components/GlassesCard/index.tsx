@@ -1,5 +1,4 @@
-import React from "react";
-import Image from "next/image";
+import styles from "./index.module.scss";
 
 interface GlassesCardProps {
   name: string;
@@ -7,17 +6,17 @@ interface GlassesCardProps {
 }
 
 const GlassesCard = ({ name, imageUrl }: GlassesCardProps) => {
-  console.log(imageUrl);
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${imageUrl})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+      className={styles.card__container}
+    >
       {name}
-      <Image
-        width={100}
-        height={100}
-        src={imageUrl}
-        alt={name}
-        priority
-      ></Image>
     </div>
   );
 };

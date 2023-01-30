@@ -41,7 +41,7 @@ export const fetchGlasses = createAsyncThunk(
         // ● Shape: “square”, “rectangle”, “round” and “cat-eye”
       },
       page: {
-        limit: 5,
+        limit: 15,
         number: getState().glassesState.page,
       },
     };

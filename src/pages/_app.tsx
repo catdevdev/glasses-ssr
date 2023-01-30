@@ -1,9 +1,7 @@
 import "@/app/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
-import { setupStore, wrapper } from "../app/store/store";
-
-// const store = setupStore();
+import { wrapper } from "../app/store/store";
 
 const App = ({ Component, ...rest }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(rest);

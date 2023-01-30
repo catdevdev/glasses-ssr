@@ -1,19 +1,8 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import {
-  collectionsSlice,
-  fetchCollections,
-  fetchGlasses,
-  filtersSlice,
-} from "@/entities/Product";
-import { NextThunkDispatch, setupStore, wrapper } from "@/app/store/store";
-import { Provider } from "react-redux";
-import { useAppSelector, useAppDispatch } from "@/shared/hooks/redux";
-import { useEffect } from "react";
-import { GetServerSideProps, NextPageContext } from "next";
 import { GlassesGalery } from "@/widgets/GlassesList";
-
-const inter = Inter({ subsets: ["latin"] });
+import { LayoutWrapper } from "@/widgets/LayoutWrapper";
+import { wrapper } from "@/app/store/store";
+import { fetchCollections, fetchGlasses } from "@/entities/Product";
 
 const Home = () => {
   return (
@@ -25,13 +14,28 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          123
+        <LayoutWrapper>
           <GlassesGalery />
-        </div>
+        </LayoutWrapper>
       </main>
     </>
   );
 };
+
+export const getStaticProps = wrapper.getStaticProps(
+  // @ts-ignore
+  (store) => async () => {
+    const {
+      colours: { selected: selectedColours },
+      shapes: { selected: selectedShapes },
+    } = store.getState().filtersState.filterOptions;
+
+    await store.dispatch(fetchCollections());
+
+    await store.dispatch(
+      fetchGlasses({ colours: selectedColours, shapes: selectedShapes })
+    );
+  }
+);
 
 export default Home;

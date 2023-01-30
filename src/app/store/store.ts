@@ -24,7 +24,6 @@ const rootReducer = combineReducers({
 });
 
 const reducerForHydrate = (state, action) => {
-  console.log(action);
   if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state
@@ -52,8 +51,6 @@ export const setupStore = () => {
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
   });
 };
-
-setupStore().getState().collectionsState.collections;
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
