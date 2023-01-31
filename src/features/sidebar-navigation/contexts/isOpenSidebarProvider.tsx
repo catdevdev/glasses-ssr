@@ -2,9 +2,9 @@ import { useState, createContext, useContext } from "react";
 
 export const IsOpenSidebarContext = createContext({
   isOpenMainSidebar: false,
-  toggleMainSidebar: () => {},
+  toggleMainSidebar: (changeTo?: boolean) => {},
   isOpenSubSidebar: false,
-  toggleSubSidebar: () => {},
+  toggleSubSidebar: (changeTo?: boolean) => {},
 });
 
 interface IsOpenSidebarProviderProps {
@@ -17,8 +17,14 @@ export const IsOpenSidebarProvider = ({
   const [isOpenMainSidebar, setIsOpenMainSidebar] = useState(false);
   const [isOpenSubSidebar, setIsOpenSubSidebar] = useState(false);
 
-  const toggleMainSidebar = () => setIsOpenMainSidebar(!isOpenMainSidebar);
-  const toggleSubSidebar = () => setIsOpenSubSidebar(!isOpenSubSidebar);
+  const toggleMainSidebar = (changeTo?: boolean) => {
+    if (changeTo !== undefined) return setIsOpenMainSidebar(changeTo);
+    setIsOpenMainSidebar(!isOpenMainSidebar);
+  };
+  const toggleSubSidebar = (changeTo?: boolean) => {
+    if (changeTo !== undefined) return setIsOpenSubSidebar(changeTo);
+    setIsOpenSubSidebar(!isOpenSubSidebar);
+  };
 
   return (
     <IsOpenSidebarContext.Provider

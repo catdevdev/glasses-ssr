@@ -3,10 +3,17 @@ import Logo from "next/image";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
 const Header = () => {
-  const { toggleMainSidebar } = useIsOpenSidebar();
+  const { toggleMainSidebar, toggleSubSidebar } = useIsOpenSidebar();
   return (
     <header className={styles.header}>
-      <div onClick={toggleMainSidebar} className={styles.header__menu}>
+      <div
+        onClick={() => {
+          toggleMainSidebar();
+          toggleSubSidebar(false);
+        }}
+        // onClick={toggleMainSidebar}
+        className={styles.header__menu}
+      >
         Menu
       </div>
       <Logo className={styles.header__logo} />

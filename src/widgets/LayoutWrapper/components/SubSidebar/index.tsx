@@ -19,10 +19,13 @@ const SubSideBar = ({ options }: { options: string[] | undefined }) => {
     >
       <div className={styles.sidebar__container}>
         <div className={styles.navlink}>
-          <div className={styles.navlink__wrapper}>
-            <div onClick={toggleSubSidebar} className={styles.navlink__title}>
-              Go Back
-            </div>
+          <div
+            onClick={() => {
+              toggleSubSidebar(false);
+            }}
+            className={styles.navlink__wrapper}
+          >
+            <div className={styles.navlink__title}>Go Back</div>
             <IoMdArrowDropupCircle />
           </div>
 
