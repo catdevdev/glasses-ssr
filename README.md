@@ -11,6 +11,5 @@ This project uses:
 
 - Server-Side Rendering with Next.js
 - State management with Redux Toolkit
--
 
 Enjoy ! 🕶️🚀
