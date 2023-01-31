@@ -6,10 +6,13 @@ import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import GlassesCard from "../GlassesCard";
 import { BarLoader } from "react-spinners";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useGalaryLazyLoading from "./useGlassesGalary";
 
 interface GlassesGaleryProps {}
 
 const GlassesGalery = ({}: GlassesGaleryProps) => {
+  const dispatch = useAppDispatch();
+
   const { glasses, isLoading, isUpdatesLoading, hasMore } = useAppSelector(
     (state) => state.glassesState
   );
@@ -25,8 +28,6 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
       );
     }
   };
-
-  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.gallery__wrapper}>
