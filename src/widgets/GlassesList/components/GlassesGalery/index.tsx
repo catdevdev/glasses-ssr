@@ -11,8 +11,6 @@ import useGalaryLazyLoading from "./useGlassesGalary";
 interface GlassesGaleryProps {}
 
 const GlassesGalery = ({}: GlassesGaleryProps) => {
-  const dispatch = useAppDispatch();
-
   const { glasses, isLoading, isUpdatesLoading, hasMore } = useAppSelector(
     (state) => state.glassesState
   );
@@ -28,6 +26,8 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
       );
     }
   };
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.gallery__wrapper}>
