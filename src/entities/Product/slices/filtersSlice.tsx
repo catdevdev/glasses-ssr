@@ -33,7 +33,7 @@ const filtersSlice = createSlice({
     removeFilterOption: (
       state,
       action: PayloadAction<{
-        filterType: keyof typeof state.filterOptions;
+        filterType: FilterOptionsInput;
         option: string;
       }>
     ) => {

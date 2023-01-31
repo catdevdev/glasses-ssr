@@ -18,12 +18,21 @@ const collectionsSlice = createSlice({
   name: "collections",
   initialState: {
     collections: [],
+    selectedCollection: null,
     error: null,
   } as CollectionsInitialState,
-  reducers: {},
+  reducers: {
+    setSelectedCollection: (state, action: PayloadAction<{ id: number }>) => {
+      state.selectedCollection =
+        state.collections.find(
+          (collection) => collection.id === action.payload.id
+        ) || null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchCollections.fulfilled, (state, action) => {
       state.collections = action.payload.collections;
+      state.selectedCollection = state.collections[0];
     });
     builder.addCase(fetchCollections.rejected, (state, action) => {
       state.error = action.error.message;

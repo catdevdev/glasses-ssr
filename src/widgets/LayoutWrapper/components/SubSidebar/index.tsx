@@ -2,6 +2,9 @@ import { IoMdArrowDropupCircle } from "react-icons/io";
 import styles from "./index.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
+import { useAppDispatch } from "@/shared/hooks/redux";
+import { collectionsSlice, filtersSlice } from "@/entities/Product";
+import { useEffect } from "react";
 
 const SubSideBar = ({
   options,
@@ -18,7 +21,19 @@ const SubSideBar = ({
     | undefined;
 }) => {
   const { isOpenSubSidebar, toggleSubSidebar } = useIsOpenSidebar();
-  console.log(isOpenSubSidebar);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    [0, 4, 3].map((id) =>
+      dispatch(
+        collectionsSlice.actions.setSelectedCollection({
+          id,
+        })
+      )
+    );
+  }, []);
+
   return (
     <CSSTransition
       in={isOpenSubSidebar}
@@ -47,6 +62,7 @@ const SubSideBar = ({
               <div
                 onClick={() => {
                   const selectedCollectionId = options.data.ids[index];
+                  console.log(selectedCollectionId);
                 }}
                 key={name}
                 className={styles.navlink__wrapper}
