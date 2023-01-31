@@ -16,7 +16,12 @@ const Header = () => {
       >
         Menu
       </div>
-      <Logo className={styles.header__logo} />
+      <Logo
+        width={30}
+        height={30}
+        src="/logo.png"
+        className={styles.header__logo}
+      />
     </header>
   );
 };
