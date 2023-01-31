@@ -2,7 +2,11 @@ import Head from "next/head";
 import { GlassesGalery } from "@/widgets/GlassesList";
 import { LayoutWrapper } from "@/widgets/LayoutWrapper";
 import { wrapper } from "@/app/store/store";
-import { fetchCollections, fetchGlasses } from "@/entities/Product";
+import {
+  collectionsSlice,
+  fetchCollections,
+  fetchGlasses,
+} from "@/entities/Product";
 import { IsOpenSidebarProvider } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
 const Home = () => {
@@ -33,6 +37,11 @@ export const getStaticProps = wrapper.getStaticProps(
       shapes: { selected: selectedShapes },
     } = store.getState().filtersState.filterOptions;
 
+    store.dispatch(
+      collectionsSlice.actions.setSelectedCollection({
+        id: 2,
+      })
+    );
     await store.dispatch(fetchCollections());
     await store.dispatch(
       fetchGlasses({ colours: selectedColours, shapes: selectedShapes })
