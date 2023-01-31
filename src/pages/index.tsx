@@ -37,12 +37,12 @@ export const getStaticProps = wrapper.getStaticProps(
       shapes: { selected: selectedShapes },
     } = store.getState().filtersState.filterOptions;
 
+    await store.dispatch(fetchCollections());
     store.dispatch(
       collectionsSlice.actions.setSelectedCollection({
         id: 2,
       })
     );
-    await store.dispatch(fetchCollections());
     await store.dispatch(
       fetchGlasses({ colours: selectedColours, shapes: selectedShapes })
     );
