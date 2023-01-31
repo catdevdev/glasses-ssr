@@ -20,19 +20,10 @@ const SubSideBar = ({
       }
     | undefined;
 }) => {
-  const { isOpenSubSidebar, toggleSubSidebar } = useIsOpenSidebar();
+  const { isOpenSubSidebar, toggleSubSidebar, toggleMainSidebar } =
+    useIsOpenSidebar();
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    [0, 4, 3].map((id) =>
-      dispatch(
-        collectionsSlice.actions.setSelectedCollection({
-          id,
-        })
-      )
-    );
-  }, []);
 
   return (
     <CSSTransition
@@ -62,7 +53,13 @@ const SubSideBar = ({
               <div
                 onClick={() => {
                   const selectedCollectionId = options.data.ids[index];
-                  console.log(selectedCollectionId);
+                  dispatch(
+                    collectionsSlice.actions.setSelectedCollection({
+                      id: selectedCollectionId,
+                    })
+                  );
+                  toggleSubSidebar();
+                  toggleMainSidebar();
                 }}
                 key={name}
                 className={styles.navlink__wrapper}
