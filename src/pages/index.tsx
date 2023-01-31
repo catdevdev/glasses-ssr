@@ -34,7 +34,6 @@ export const getStaticProps = wrapper.getStaticProps(
     } = store.getState().filtersState.filterOptions;
 
     await store.dispatch(fetchCollections());
-
     await store.dispatch(
       fetchGlasses({ colours: selectedColours, shapes: selectedShapes })
     );
