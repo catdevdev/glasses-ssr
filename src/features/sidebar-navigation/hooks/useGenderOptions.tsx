@@ -12,9 +12,17 @@ const useGenderOptions = () => {
 
   const getOptionsForSubMenu = () => {
     const groupedByGender = groupByGender(collections);
-    if (selectedGender === "Man") return groupedByGender.men.names;
+    if (selectedGender === "Man")
+      return {
+        gender: "Man",
+        data: groupedByGender.men,
+      };
 
-    if (selectedGender === "Woman") return groupedByGender.women.names;
+    if (selectedGender === "Woman")
+      return {
+        gender: "Woman",
+        data: groupedByGender.women,
+      };
   };
 
   return {

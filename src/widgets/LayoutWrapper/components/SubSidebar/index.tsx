@@ -3,7 +3,20 @@ import styles from "./index.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
-const SubSideBar = ({ options }: { options: string[] | undefined }) => {
+const SubSideBar = ({
+  options,
+}: {
+  options:
+    | {
+        gender: string;
+        data: {
+          names: string[];
+          configuration_names: string[];
+          ids: number[];
+        };
+      }
+    | undefined;
+}) => {
   const { isOpenSubSidebar, toggleSubSidebar } = useIsOpenSidebar();
   console.log(isOpenSubSidebar);
   return (
@@ -30,9 +43,15 @@ const SubSideBar = ({ options }: { options: string[] | undefined }) => {
           </div>
 
           {options &&
-            options.map((option) => (
-              <div key={option} className={styles.navlink__wrapper}>
-                <div className={styles.navlink__title}>{option}</div>
+            options.data.names.map((name, index) => (
+              <div
+                onClick={() => {
+                  const selectedCollectionId = options.data.ids[index];
+                }}
+                key={name}
+                className={styles.navlink__wrapper}
+              >
+                <div className={styles.navlink__title}>{name}</div>
                 <IoMdArrowDropupCircle />
               </div>
             ))}

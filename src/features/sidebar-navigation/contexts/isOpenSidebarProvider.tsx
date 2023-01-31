@@ -43,9 +43,3 @@ export const IsOpenSidebarProvider = ({
 export const useIsOpenSidebar = () => useContext(IsOpenSidebarContext);
 
 //
-
-// can you create Context with name IsOpenSidebar with two states. Create function for   and also create custom hook for it. add types from typescript
-
-// const [isOpenMainSideNavigation, setIsOpenMainSideNavigation] =
-//     useState(false);
-//   const [isOpenSubSideNavigation, setIsOpenSubSideNavigation] = useState(false);
