@@ -17,6 +17,7 @@ import { GlassesInitialState } from "@/entities/Product/models/glasses";
 import { FiltersInitialState } from "@/entities/Product/models/filters";
 import { CollectionsInitialState } from "@/entities/Product/models/collections";
 import { filterListener } from "@/entities/Product/middleware/filterListener";
+import { collectionListener } from "@/entities/Product/middleware/collectionListener";
 
 const rootReducer = combineReducers({
   collectionsState: collectionsSlice.reducer,
@@ -50,7 +51,9 @@ export const setupStore = () => {
   return configureStore({
     reducer: reducerForHydrateWithTypes,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().prepend(filterListener.middleware).concat(),
+      getDefaultMiddleware()
+        .prepend(filterListener.middleware, collectionListener.middleware)
+        .concat(),
   });
 };
 

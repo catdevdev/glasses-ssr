@@ -6,20 +6,22 @@ import {
   TypedAddListener,
   TypedStartListening,
 } from "@reduxjs/toolkit";
+import { collectionsSlice } from "../slices/collectionsSlice";
 import { filtersSlice } from "../slices/filtersSlice";
 import { refetchGlasses } from "../slices/glassesSlice";
 
-export const filterListener = createListenerMiddleware();
+export const collectionListener = createListenerMiddleware();
 
 export type AppStartListening = TypedStartListening<RootState, AppDispatch>;
 
-const startFilterListener = filterListener.startListening as AppStartListening;
+const startCollectionListener =
+  collectionListener.startListening as AppStartListening;
 
 // @ts-ignore
 let previousDispatchCall = null;
 
-startFilterListener({
-  actionCreator: filtersSlice.actions.switchFilterOption,
+startCollectionListener({
+  actionCreator: collectionsSlice.actions.setSelectedCollection,
   effect: (action, state) => {
     const { colours, shapes } = state.getState().filtersState.filterOptions;
 
