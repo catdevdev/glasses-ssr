@@ -40,7 +40,7 @@ export const getStaticProps = wrapper.getStaticProps(
     await store.dispatch(fetchCollections());
     store.dispatch(
       collectionsSlice.actions.setSelectedCollection({
-        id: 2,
+        id: 1,
       })
     );
     await store.dispatch(
