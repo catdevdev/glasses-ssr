@@ -66,22 +66,7 @@ const Wrapper = ({ children }: WrapperProps) => {
   return (
     <div>
       <Header />
-      <div
-        onClick={() => {
-          setActiveMain(!activeMain);
-        }}
-      >
-        123123
-      </div>
-      <div
-        onClick={() => {
-          setActiveSub(!activeSub);
-        }}
-      >
-        99999
-      </div>
       <SidebarsGroup />
-
       <NavigationBar
         openCloseColors={() => openCloseFilter("colours")}
         openCloseShapes={() => openCloseFilter("shapes")}

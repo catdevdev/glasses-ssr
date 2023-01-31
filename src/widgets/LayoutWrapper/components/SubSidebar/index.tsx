@@ -4,12 +4,12 @@ import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
 const SubSideBar = () => {
-  const { isOpenSubSidebar } = useIsOpenSidebar();
+  const { isOpenSubSidebar, toggleSubSidebar } = useIsOpenSidebar();
+  console.log(isOpenSubSidebar);
   return (
     <CSSTransition
       in={isOpenSubSidebar}
       timeout={200}
-      unmountOnExit
       classNames={{
         enterActive: styles["sidebar__container--enter-active"],
         enterDone: styles["sidebar__container--enter-done"],
@@ -19,6 +19,12 @@ const SubSideBar = () => {
     >
       <div className={styles.sidebar__container}>
         <div className={styles.navlink}>
+          <div className={styles.navlink__wrapper}>
+            <div onClick={toggleSubSidebar} className={styles.navlink__title}>
+              Go Back
+            </div>
+            <IoMdArrowDropupCircle />
+          </div>
           <div className={styles.navlink__wrapper}>
             <div className={styles.navlink__title}>hello</div>
             <IoMdArrowDropupCircle />

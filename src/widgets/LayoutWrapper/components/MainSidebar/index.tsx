@@ -4,7 +4,8 @@ import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 
 const MainSideBar = () => {
-  const { isOpenMainSidebar } = useIsOpenSidebar();
+  const { isOpenMainSidebar, toggleSubSidebar } = useIsOpenSidebar();
+  console.log(isOpenMainSidebar);
   return (
     <CSSTransition
       in={isOpenMainSidebar}
@@ -19,7 +20,9 @@ const MainSideBar = () => {
       <div className={styles.sidebar__container}>
         <div className={styles.navlink}>
           <div className={styles.navlink__wrapper}>
-            <div className={styles.navlink__title}>hello</div>
+            <div onClick={toggleSubSidebar} className={styles.navlink__title}>
+              hello
+            </div>
             <IoMdArrowDropupCircle />
           </div>
           <div className={styles.navlink__wrapper}>

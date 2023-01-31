@@ -2,26 +2,30 @@
   &__container {
     width: 300px;
     height: 100vh;
-    background: green;
+    background: white;
     position: fixed;
-    z-index: 1000;
+    z-index: 3000;
     transition: transform 200ms ease-in-out;
   }
 
+  &__back {
+    font-size: 32px;
+  }
+
   &__container--enter-active {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   &__container--enter-done {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   &__container--exit-active {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 
   &__container--exit-done {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 }
 

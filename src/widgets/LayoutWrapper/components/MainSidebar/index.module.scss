@@ -9,11 +9,11 @@
   }
 
   &__container--enter-active {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 
   &__container--enter-done {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 
   &__container--exit-active {
