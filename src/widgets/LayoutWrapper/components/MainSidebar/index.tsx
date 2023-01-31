@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
 import { Gender } from "@/features/sidebar-navigation/helpers/groupByGender";
+import { AiFillCaretRight } from "react-icons/ai";
 
 const MainSideBar = ({
   options,
@@ -12,7 +13,6 @@ const MainSideBar = ({
   selectGender: (gender: Gender) => void;
 }) => {
   const { isOpenMainSidebar, toggleSubSidebar } = useIsOpenSidebar();
-  console.log(isOpenMainSidebar);
 
   return (
     <CSSTransition
@@ -38,7 +38,7 @@ const MainSideBar = ({
                 className={styles.navlink__wrapper}
               >
                 <div className={styles.navlink__title}>{option}</div>
-                <IoMdArrowDropupCircle />
+                <AiFillCaretRight />
               </div>
             );
           })}

@@ -1,4 +1,4 @@
-import { IoMdArrowDropupCircle } from "react-icons/io";
+import { AiFillCaretLeft } from "react-icons/ai";
 import styles from "./index.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useIsOpenSidebar } from "@/features/sidebar-navigation/contexts/isOpenSidebarProvider";
@@ -45,7 +45,7 @@ const SubSideBar = ({
             className={styles.navlink__wrapper}
           >
             <div className={styles.navlink__title}>Go Back</div>
-            <IoMdArrowDropupCircle />
+            <AiFillCaretLeft />
           </div>
 
           {options &&
@@ -65,7 +65,6 @@ const SubSideBar = ({
                 className={styles.navlink__wrapper}
               >
                 <div className={styles.navlink__title}>{name}</div>
-                <IoMdArrowDropupCircle />
               </div>
             ))}
         </div>
