@@ -35,12 +35,12 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
         }
       >
         <div className={styles.gallery__container}>
-          {glasses.map(({ id, name, glass_variants }) => {
+          {glasses.map(({ id, name, glass_variants }, index) => {
             const firstImageUrl = glass_variants[0].media[0].url;
 
             return (
               <GlassesCard
-                key={id}
+                key={index}
                 name={name}
                 imageUrl={firstImageUrl}
                 cardIsLoading={isUpdatesLoading}

@@ -54,8 +54,10 @@ export const fetchGlasses = createAsyncThunk(
       source.cancel();
     });
 
+    const selectedCollection = getState().collectionsState.selectedCollection;
+
     const response = await axiosInstance.get<GlassesResponse>(
-      `/collections/${"spectacles-men"}/glasses`,
+      `/collections/${selectedCollection?.configuration_name}/glasses`,
       {
         params,
         paramsSerializer: {
