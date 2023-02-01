@@ -8,12 +8,12 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the project dependencies
-RUN yarn install --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 # Copy the rest of the project files to the container
 COPY . .
 
-RUN yarn build
+RUN npm build
 
 COPY . .
 
