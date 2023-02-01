@@ -1,8 +1,4 @@
-import { useEffect } from "react";
 import styles from "./index.module.scss";
-
-import { fetchGlasses } from "@/entities/Product";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import GlassesCard from "../GlassesCard";
 import { BarLoader } from "react-spinners";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -35,7 +31,7 @@ const GlassesGalery = ({}: GlassesGaleryProps) => {
         }
       >
         <div className={styles.gallery__container}>
-          {glasses.map(({ id, name, glass_variants }, index) => {
+          {glasses.map(({ name, glass_variants }, index) => {
             const firstImageUrl = glass_variants[0].media[0].url;
 
             return (
