@@ -13,8 +13,9 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the project files to the container
 COPY . .
 
-# Build the Nest.js application
 RUN yarn build
+
+COPY . .
 
 # Start the Nest.js application
 CMD [ "yarn", "start" ]
